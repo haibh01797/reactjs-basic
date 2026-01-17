@@ -2,7 +2,7 @@ function App() {
   return (
     <div>
       Hello world
-      <div>CI/CD AUTO DEPLOY OK</div>
+      <div>Luong Hoang Hai </div>
     </div>
   );
 }
