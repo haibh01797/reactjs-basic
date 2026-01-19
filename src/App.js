@@ -3,7 +3,7 @@ function App() {
     <div>
       Hello world
       <div>Luong Hoang Hai </div>
-      <div>Unicloud </div>
+      <div>Unicloud. </div>
     </div>
   );
 }
