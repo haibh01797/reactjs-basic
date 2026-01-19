@@ -10,29 +10,29 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      # 1. Checkout source
+      # 1️⃣ Lấy source code mới nhất từ GitHub
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Login Docker Hub
+      # 2️⃣ Login Docker Hub
       - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: |
+          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login \
+            -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
-      # 3. Build & Push image
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: hailh123/reactjs-basic:latest
+      # 3️⃣ Build image (KHÔNG cache để đảm bảo UI đổi)
+      - name: Build Docker image
+        run: |
+          docker build --no-cache -t hailh123/reactjs-basic:latest .
 
-      # 4. Deploy (local docker, KHÔNG SSH)
+      # 4️⃣ Push image lên Docker Hub
+      - name: Push Docker image
+        run: |
+          docker push hailh123/reactjs-basic:latest
+
+      # 5️⃣ Deploy container (docker thuần, không SSH)
       - name: Deploy container
         run: |
-          docker pull hailh123/reactjs-basic:latest
           docker stop reactjs-container || true
           docker rm reactjs-container || true
           docker run -d \
