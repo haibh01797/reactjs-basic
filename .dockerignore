@@ -1,0 +1,24 @@
+# Git
+.git
+.gitignore
+
+# Node
+node_modules
+npm-debug.log
+yarn.lock
+
+# Build output
+build
+dist
+
+# CI / Runner
+actions-runner
+_runner
+_work
+
+# OS
+.DS_Store
+
+# Docker
+Dockerfile
+docker-compose.yml
